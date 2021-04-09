@@ -73,7 +73,7 @@
   
 - name: "Add Deb-Backport repository for {{ OS_CODENAME }}"
   apt_repository:
-    repo: "deb http://deb.debian.org/debian {{ OS_CODENAME }}-backports main"
+    repo: "{{ REPO_URL }} {{ OS_CODENAME }}-backports main"
     state: present
     update_cache: true
     
