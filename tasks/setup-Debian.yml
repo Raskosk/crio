@@ -43,35 +43,35 @@
     - software-properties-common
     state: present
 
-  - name: Add libcontainers Repo Key
-    become: yes
-    apt_key:
-      id: 2472D6D0D2F66AF87ABA8DA34D64390375060AA4 
-      url: "https://download.opensuse.org/repositories/devel:/kubic:/libcontainers:/stable/{{ ansible_distribution }}_{{ ansible_distribution_major_version }}/Release.key"
-      keyring: /etc/apt/trusted.gpg.d/libcontainers.gpg
+- name: "Add libcontainers Repo Key"
+  become: yes
+  apt_key:
+    id: 2472D6D0D2F66AF87ABA8DA34D64390375060AA4 
+    url: "https://download.opensuse.org/repositories/devel:/kubic:/libcontainers:/stable/{{ ansible_distribution }}_{{ ansible_distribution_major_version }}/Release.key"
+    keyring: /etc/apt/trusted.gpg.d/libcontainers.gpg
 
-  - name: Add libcontainers (crio) Repo Key
-    become: yes
-    apt_key:
-      id: 2472D6D0D2F66AF87ABA8DA34D64390375060AA4 
-      url: "https://download.opensuse.org/repositories/devel:kubic:libcontainers:stable:cri-o:{{ VERSION }}/{{ ansible_distribution }}_{{ ansible_distribution_major_version }}/Release.key"
-      keyring: /etc/apt/trusted.gpg.d/libcontainers.gpg
+- name: "Add libcontainers (crio) Repo Key"
+  become: yes
+  apt_key:
+    id: 2472D6D0D2F66AF87ABA8DA34D64390375060AA4 
+    url: "https://download.opensuse.org/repositories/devel:kubic:libcontainers:stable:cri-o:{{ VERSION }}/{{ ansible_distribution }}_{{ ansible_distribution_major_version }}/Release.key"
+    keyring: /etc/apt/trusted.gpg.d/libcontainers.gpg
   
-  - name: Add libcontainers Repo
-    become: yes
-    apt_repository:
-      repo: "deb https://download.opensuse.org/repositories/devel:/kubic:/libcontainers:/stable/cri-o:/{{ VERSION }}/{{ ansible_distribution }}_{{ ansible_distribution_major_version }}/ /"
-      state: present
-      filename: "devel:kubic:libcontainers:stable:cri-o:{{ VERSION }}.list"
+- name: "Add libcontainers Repo"
+  become: yes
+  apt_repository:
+    repo: "deb https://download.opensuse.org/repositories/devel:/kubic:/libcontainers:/stable/cri-o:/{{ VERSION }}/{{ ansible_distribution }}_{{ ansible_distribution_major_version }}/ /"
+    state: present
+    filename: "devel:kubic:libcontainers:stable:cri-o:{{ VERSION }}.list"
 
-  - name: Add libcontainers (crio) Repo
-    become: yes
-    apt_repository:
-      repo: "deb https://download.opensuse.org/repositories/devel:/kubic:/libcontainers:/stable/{{ ansible_distribution }}_{{ ansible_distribution_major_version }}/ /"
-      state: present
-      filename: "devel:kubic:libcontainers:stable.list"
+- name: "Add libcontainers (crio) Repo"
+  become: yes
+  apt_repository:
+    repo: "deb https://download.opensuse.org/repositories/devel:/kubic:/libcontainers:/stable/{{ ansible_distribution }}_{{ ansible_distribution_major_version }}/ /"
+    state: present
+    filename: "devel:kubic:libcontainers:stable.list"
   
-- name: Add Deb-Backport repository.
+- name: "Add Deb-Backport repository"
   apt_repository:
     repo: "deb http://deb.debian.org/debian buster-backports main"
     state: present
