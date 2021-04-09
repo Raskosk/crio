@@ -56,26 +56,33 @@
     id: 2472D6D0D2F66AF87ABA8DA34D64390375060AA4 
     url: "https://download.opensuse.org/repositories/devel:kubic:libcontainers:stable:cri-o:{{ VERSION }}/{{ ansible_distribution }}_{{ ansible_distribution_major_version }}/Release.key"
     keyring: /etc/apt/trusted.gpg.d/libcontainers.gpg
-  
-- name: "Add libcontainers Repo"
-  become: yes
-  apt_repository:
-    repo: "deb https://download.opensuse.org/repositories/devel:/kubic:/libcontainers:/stable/cri-o:/{{ VERSION }}/{{ ansible_distribution }}_{{ ansible_distribution_major_version }}/ /"
-    state: present
-    filename: "devel:kubic:libcontainers:stable:cri-o:{{ VERSION }}.list"
 
 - name: "Add libcontainers (crio) Repo"
   become: yes
   apt_repository:
     repo: "deb https://download.opensuse.org/repositories/devel:/kubic:/libcontainers:/stable/{{ ansible_distribution }}_{{ ansible_distribution_major_version }}/ /"
     state: present
-    filename: "devel:kubic:libcontainers:stable.list"
-  
-- name: "Add Deb-Backport repository"
+    filename: "devel-kubic-libcontainers-stable"
+
+- name: "Add libcontainers (crio) Repo"
+  become: yes
   apt_repository:
-    repo: "deb http://deb.debian.org/debian buster-backports main"
+    repo: "deb http://download.opensuse.org/repositories/devel:/kubic:/libcontainers:/stable:/cri-o:/{{ VERSION }}/{{ ansible_distribution }}_{{ ansible_distribution_major_version }}/ /"
+    state: present
+    filename: "devel-kubic-libcontainers-stable-cri-o-{{ VERSION }}"
+  
+- name: "Add Deb-Backport repository for {{ OS_CODENAME }}"
+  apt_repository:
+    repo: "deb http://deb.debian.org/debian {{ OS_CODENAME }}-backports main"
     state: present
     update_cache: true
+    
+- name: "Install libseccomp-dev from {{ OS_CODENAME }}-backports"
+  apt:
+    name: libseccomp-dev
+    state: latest
+    default_release: {{ OS_CODENAME }}-backports
+    update_cache: yes
 
 - name: "Install crio"
   apt:
