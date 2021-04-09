@@ -6,6 +6,7 @@
   - ansible_python_interpreter: "/usr/bin/python3"
   - VERSION: "1.20"
   - OS_CODENAME: "Buster"
+  - REPO_URL: "deb http://deb.debian.org/debian"
   - http_proxy: ""
   - https_proxy: ""
   - no_proxy: ""
