@@ -57,7 +57,7 @@
     url: "https://download.opensuse.org/repositories/devel:kubic:libcontainers:stable:cri-o:{{ VERSION }}/{{ ansible_distribution }}_{{ ansible_distribution_major_version }}/Release.key"
     keyring: /etc/apt/trusted.gpg.d/libcontainers.gpg
 
-- name: "Add libcontainers (crio) Repo"
+- name: "Add libcontainers Repo"
   become: yes
   apt_repository:
     repo: "deb https://download.opensuse.org/repositories/devel:/kubic:/libcontainers:/stable/{{ ansible_distribution }}_{{ ansible_distribution_major_version }}/ /"
@@ -81,7 +81,7 @@
   apt:
     name: libseccomp-dev
     state: latest
-    default_release: {{ OS_CODENAME }}-backports
+    default_release: "{{ OS_CODENAME }}-backports"
     update_cache: yes
 
 - name: "Install crio"
